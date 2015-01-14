@@ -40,11 +40,9 @@
 			} else{
 				echo('<h3>logged in</h3>');
 			}
-			echo('<h2>Warenkorb</h2>
-							<p>...</p>
-							<p>...</p>
-							<p>...</p>
-						</div><!-- .col-md-2 -->
+			echo('<h2>Warenkorb</h2>');
+			echo displayCart();
+			echo('</div><!-- .col-md-2 -->
 					</div><!-- ##main-content -->
 				</div><!-- ##content -->
 			</div><!-- ##content-wrap -->
@@ -63,5 +61,32 @@
 				</div><!-- .container -->
 			</div><!-- ##footer -->
 			');
+   }
+   
+   function displayCart(){
+		if(isset($_SESSION['cart'])){
+			$cart = $_SESSION['cart'];
+			$query = "SELECT name, price FROM articles WHERE articleID = ?";
+			$mysqli = new mysqli('localhost', 'root', '', 'hockey-store_ch');
+			$stmt = $mysqli->prepare($query);
+		
+			$totalPrice = 0;
+			foreach($cart as $artId=>$num){
+				$stmt->bind_param('i', $artId);
+				$stmt->execute();
+				$res = $stmt->get_result();
+				$row = $res->fetch_object();
+				$name = $row->name;
+				$price = $row->price;
+				$sum = $num*$price;
+				$totalPrice += $sum;
+				
+				echo $name . ': ' . $num . 'x' . $price . '=' . $sum;
+				echo '<a href="cart.php?action=remove&artId=' . $artId . '&num=1">remove</a><br/>';
+			}
+			echo 'totaler Wert: ' . $totalPrice;
+		} else {
+			echo 'Der Warenkorb ist leer!';
+		}
    }
 ?>

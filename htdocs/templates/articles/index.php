@@ -31,6 +31,12 @@
    					<img src="http://localhost<?php echo $row->picture; ?>" />
                   <div class="article-lead-text"><?php echo $row->lead; ?></div>
                   <h3>Preis: CHF <?php echo $row->price; ?></h3>
+				  <form action="cart.php" method="GET">
+					<input type="hidden" name="action" value="add">
+					<input type="hidden" name="artId" value="<?php echo $row->articleID ?>">
+					<input type="number" name="num" value=1 required>
+					<input type="submit" value="Bestellen">
+				  </form>
                </div>
 				</div>
 				<?php

@@ -4,8 +4,7 @@
     $site = new asite();
 
     initialise_site($site);
-    $page = new apage(2);
-	$site->setPage($page);
+ 
 	loadPageAdmin($site);
     
 ?>

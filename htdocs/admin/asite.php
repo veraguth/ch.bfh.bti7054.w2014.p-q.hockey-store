@@ -3,7 +3,7 @@
     class asite {
         private $headers;
         private $footers;
-        private $page;
+        //private $page;
 
         public function __construct() {
             $this->headers = array();
@@ -21,7 +21,7 @@
                 $showPages = ' show';
             }
 
-            if (isset($_GET['articleID'])) {
+            if (isset($_GET['articles'])) {
                 $showArticles = ' show';
             }
             include 'admin/layout/admin.php';
@@ -43,13 +43,13 @@
         public function addFooter($file) {
             $this->footers[] = $file;
         }
-
+/*
         public function setPage(apage $page) {
             $this->page = $page;
         }
 
         public function getPage(){
         	return $this->page;
-        }
+        }*/
     }
 ?> 

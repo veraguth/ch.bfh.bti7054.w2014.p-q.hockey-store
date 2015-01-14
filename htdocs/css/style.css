@@ -106,37 +106,15 @@
 
 /*
 |--------------------------------------------------------------------------
-| search
+| artikel
 |--------------------------------------------------------------------------
 */
-.search {
-	margin-bottom: 15px;
-	border-radius: 4px;
-	color: #428bca;
-	font-size: 16px;
-	line-height: 24px;
-	padding: 8px 15px;
-	width: 94%;
-	border:#428bca 2px solid;
-}
-
-.search-button {
-	width:5%;
-	padding: 10px 0;
-	float: right;
-	border: none;
-	background: #428bca;
-}
-
-.glyphicon-search {
-	height: 24px;
-	color: #fff;
-}
-
-.search-button:hover {
+.article-lead {
+	text-align: center;	
 	background: #fff;
+	padding: 15px;
+	margin-bottom: 25px;
 }
-
-.search-button:hover .glyphicon-search {
-	color: #428bca;
+.article-lead img {
+	height: 200px;
 }

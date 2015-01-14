@@ -22,7 +22,7 @@
             $this->page->loadPage($pageID);
             $menu = getMenu(1);
 			
-			setLayout($menu, $this->page->getContent());
+			setLayout($menu, $this->page->getContent(), $this->page->getTemlate(), $pageID);
 			
             foreach($this->footers as $footer) {
                 include $footer;

@@ -26,6 +26,11 @@
 				  $this->content = $row->content;
 				}
         }
+
+        public function getTemlate() {
+			//todo: get template path from db
+			return 'templates/articles/index.php';
+        }
 		
 		public function setTitle() {	
 			include 'dbconnect.php';

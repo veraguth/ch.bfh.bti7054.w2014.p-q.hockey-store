@@ -1,5 +1,6 @@
 <?php
-   function setLayout($menu, $content){
+   function setLayout($menu, $content, $template, $pageID){
+   	include($template);
    	echo('
 			<div id="header">
 				<div id="banner">
@@ -9,27 +10,25 @@
 			<div id="content-wrap">
 				<div id="content" class="container">
 					<div id="main-content" class="row">
-						<div class="col-md-2">');
+						<div class="col-md-2 hidden-xs hidden-sm">');
 							echo $menu;
 							echo ('
 						</div>
 						<div class="col-md-8">
 							<div class="row">
-								<div class="col-md-12">
-									<input class="search" type="text">
-									<button type="button" class="btn btn-default search-button">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</div><!-- .col-md-12 -->
-							</div><!-- .row -->
-							<div class="row">
 								<div class="col-md-12">');
 
+			
             echo($content);
+            
 			
 			echo('
 								</div><!-- .col-md-12 -->
-							</div><!-- .row -->
+							</div><!-- .row -->');
+							
+			echo(getTemplateContent($pageID));
+			echo('
+								
 						</div><!-- .col-md-8 -->
 						<div class="col-md-2">
 							<button type="button" class="btn login-button">

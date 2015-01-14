@@ -16,7 +16,7 @@
         public function getContent() {
             return "<H1>{$this->title}</H1>".$this->content;
         }
-
+/*
         public function setContent() {
 			include 'dbconnect.php';
 			$request = "SELECT content FROM pages WHERE pageID = $this->pageID";
@@ -25,8 +25,8 @@
 				{
 				  $this->content = $row->content;
 				}
-        }
-		
+        }*/
+		/*
 		public function setTitle() {	
 			include 'dbconnect.php';
 			$request = "SELECT title FROM pages WHERE pageID = $this->pageID";
@@ -35,11 +35,11 @@
 				{
 				  $this->title = $row->title;
 				}
-		}
-
+		}*/
+/*
 		public function getPageID() {
 			return $this->pageID;
-		}
+		}*/
 
 		function loadPage($pageID) {
 		    $this->pageID = $pageID;

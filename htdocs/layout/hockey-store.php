@@ -30,12 +30,17 @@
 			echo('
 								
 						</div><!-- .col-md-8 -->
-						<div class="col-md-2">
-							<button type="button" class="btn login-button">
-								Anmelden
-							</button>
-							</a>
-							<h2>Warenkorb</h2>
+						<div class="col-md-2">');
+			if(!isset($_SESSION['username'])){
+			echo('<form name="login" action="login.php" method="POST">
+								<input name="username" type="text" required="true">
+								<input name="password" type="password" required="true">
+								<input type="submit">
+							</form>');
+			} else{
+				echo('<h3>logged in</h3>');
+			}
+			echo('<h2>Warenkorb</h2>
 							<p>...</p>
 							<p>...</p>
 							<p>...</p>

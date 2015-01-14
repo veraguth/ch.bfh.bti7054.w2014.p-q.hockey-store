@@ -1,83 +1,29 @@
-<html>
-<head>
-
-</head>
-<body>
-
 <?php
-
-function Login()
-{
-    if (empty($_POST['username'])) {
-        $this->HandleError("UserName is empty!");
-        return false;
-    }
-
-    if (empty($_POST['password'])) {
-        $this->HandleError("Password is empty!");
-        return false;
-    }
-
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-
-    if (!$this->CheckLoginInDB($username, $password)) {
-        return false;
-    }
-
-    session_start();
-
-    $_SESSION[$this->GetLoginSessionVar()] = $username;
-
-    return true;
+session_start();
+if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password'])){
+	$username = trim($_POST['username']);
+	$password = trim($_POST['password']);
+	
+	$query = "SELECT username FROM user WHERE username = ? AND password = ?";
+	$mysqli = new mysqli('localhost', 'root', '', 'hockey-store_ch');
+	$stmt = $mysqli->prepare($query);
+	
+	$stmt->bind_param('ss', $username, $password);
+	$stmt->execute();
+	$stmt->bind_result($username);
+	$stmt->store_result();
+	
+	if($stmt->num_rows == 1){
+		$_SESSION['username'] = $username;
+		
+		header('HTTP/1.1 303 See Other');
+		header('Location: home');
+	} else {
+	//TODO kuttu1: redirect to proper error page
+		echo 'wrong username or password';
+	}
+	
+	$stmt->close();
+	$mysqli->close();
 }
-
-
-function CheckLoginInDB($username,$password)
-{
-    if(!$this->DBLogin())
-    {
-        $this->HandleError("Database login failed!");
-        return false;
-    }
-    $username = $this->SanitizeForSQL($username);
-    $pwdmd5 = md5($password);
-    $qry = "Select name, email from $this->tablename ".
-        " where username='$username' and password='$pwdmd5' ".
-        " and confirmcode='y'";
-
-    $result = mysql_query($qry,$this->connection);
-
-    if(!$result || mysql_num_rows($result) <= 0)
-    {
-        $this->HandleError("Error logging in. ".
-            "The username or password does not match");
-        return false;
-    }
-    return true;
-}
-
 ?>
-
-
-<form id='login' action='login.php' method='post' accept-charset='UTF-8'>
-    <fieldset>
-        <legend>Login</legend>
-
-        <label for='username'>UserName*:</label>
-        <input type='text' name='username' id='username' maxlength="50"/>
-
-        <label for='password'>Password*:</label>
-        <input type='password' name='password' id='password' maxlength="50"/>
-
-        <input type='submit' name='Submit' value='Submit'/>
-
-    </fieldset>
-</form>
-
-
-
-</body>
-
-
-</html>

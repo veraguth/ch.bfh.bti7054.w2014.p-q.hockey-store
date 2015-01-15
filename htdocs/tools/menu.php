@@ -7,7 +7,7 @@ function getMenu($pageID){
 	while($row = mysqli_fetch_object($return)) {
 		  $menu = $menu.'<li><a href="http://localhost/'.$row->path.'">'.$row->naviText.'</a></li>';
 	}
-	$menu.'</ul>';
+	$menu = $menu.'</ul>';
 	return $menu;
 }
 

@@ -10,8 +10,8 @@ if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['pass
 	
 	$stmt->bind_param('ss', $username, $password);
 	$stmt->execute();
-	$stmt->bind_result($username);
 	$stmt->store_result();
+	$stmt->bind_result($username);
 	
 	if($stmt->num_rows == 1){
 		$_SESSION['username'] = $username;

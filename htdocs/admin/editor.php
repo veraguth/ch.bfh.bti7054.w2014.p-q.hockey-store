@@ -21,6 +21,9 @@
 				  $articleCategoryID = $row->articleCategoryID;
 				}
 			$contentEditor = $contentEditor.'<form action="http://localhost/administrator?pageID='.$_GET['pageID'].'" method="post">';
+			$contentEditor = $contentEditor.'<div class="col-md-12"><input type="submit" name="deletePage" value="delete page" /></div>';
+			$contentEditor = $contentEditor.'</form>';
+			$contentEditor = $contentEditor.'<form action="http://localhost/administrator?pageID='.$_GET['pageID'].'" method="post">';
 			$contentEditor = $contentEditor.'<div class="col-md-12"><input type="submit" name="savePage" value="save page" /></div>';
 			$contentEditor = $contentEditor.'<div class="col-md-2">Title</div><div class="col-md-10"><input name="title" type="text" value="'.$title.'" /></div>';
 			$contentEditor = $contentEditor.'<div class="col-md-2">naviText</div><div class="col-md-10"><input name="naviText" type="text" value="'.$naviText.'" /></div>';
@@ -28,6 +31,7 @@
 			$contentEditor = $contentEditor.'<div class="col-md-2">naviText</div><div class="col-md-10"><input name="path" type="text" value="'.$path.'" /></div>';
 			$contentEditor = $contentEditor.'<div class="col-md-2">Article category ID</div><div class="col-md-10"><input name="articleCategoryID" type="text" value="'.$articleCategoryID.'" /></div>';
 			$contentEditor = $contentEditor.'</form>';
+
 			
 		}
 
@@ -53,6 +57,9 @@
 				  $lead = $row->lead;
 				}
 			$contentEditor = $contentEditor.'<form action="http://localhost/administrator?articles=1&articleCategoryID='.$_GET['articleCategoryID'].'&articleID='.$_GET['articleID'].'" method="post">';
+			$contentEditor = $contentEditor.'<div class="col-md-12"><input type="submit" name="deleteArticle" value="delete article" /></div>';
+			$contentEditor = $contentEditor.'</form>';
+			$contentEditor = $contentEditor.'<form action="http://localhost/administrator?articles=1&articleCategoryID='.$_GET['articleCategoryID'].'&articleID='.$_GET['articleID'].'" method="post">';
 			$contentEditor = $contentEditor.'<div class="col-md-12"><input type="submit" name="saveArticle" value="save article" /></div>';
 			$contentEditor = $contentEditor.'<div class="col-md-2">Name</div><div class="col-md-10"><input name="name" type="text" value="'.$name.'" /></div>';
 			$contentEditor = $contentEditor.'<div class="col-md-2">Picture</div><div class="col-md-10"><input name="picture" type="text" value="'.$picture.'" /></div>';
@@ -69,8 +76,16 @@
 		    savePage();
 		}
 
+		if(isset($_POST['deletePage'])) {
+		    deletePage();
+		}
+
 		if(isset($_POST['saveArticle'])) {
 		    saveArticle();
+		}
+
+		if(isset($_POST['deleteArticle'])) {
+		    deleteArticle();
 		}
 		
 		return $contentEditor;
@@ -97,20 +112,40 @@
 	}
 
 	function savePage() {
-	include 'dbconnect.php';
-	$request = "UPDATE pages SET";
-	$request = $request." title = '".$_POST['title']."',";
-	$request = $request." naviText = '".$_POST['naviText']."',";
-	$request = $request." content = '".$_POST['content']."',";
-	$request = $request." path = '".$_POST['path']."',";
-	$request = $request." articleCategoryID = '".$_POST['articleCategoryID']."'";
-	$request = $request." WHERE pageID = ".$_GET['pageID'];
+		include 'dbconnect.php';
+		$request = "UPDATE pages SET";
+		$request = $request." title = '".$_POST['title']."',";
+		$request = $request." naviText = '".$_POST['naviText']."',";
+		$request = $request." content = '".$_POST['content']."',";
+		$request = $request." path = '".$_POST['path']."',";
+		$request = $request." articleCategoryID = '".$_POST['articleCategoryID']."'";
+		$request = $request." WHERE pageID = ".$_GET['pageID'];
 
-	if ($db->query($request) === TRUE) {
-	    echo "save successfull";
-	} else {
-	    echo "save caused error: " . $db->error;
+		if ($db->query($request) === TRUE) {
+		    echo "save successfull";
+		} else {
+		    echo "save caused error: " . $db->error;
+		}
 	}
-}
+
+	function deletePage() {
+		include 'dbconnect.php';
+		$request = "DELETE FROM pages WHERE pageID = ".$_GET['pageID'];
+		if ($db->query($request) === TRUE) {
+		    echo "delete successfull";
+		} else {
+		    echo "delete caused error: " . $db->error;
+		}
+	}
+
+	function deleteArticle() {
+		include 'dbconnect.php';
+		$request = "DELETE FROM articles WHERE articleID = ".$_GET['articleID'];
+		if ($db->query($request) === TRUE) {
+		    echo "delete successfull";
+		} else {
+		    echo "delete caused error: " . $db->error;
+		}
+	}
     
 ?>

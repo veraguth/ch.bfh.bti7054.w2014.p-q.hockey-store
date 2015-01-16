@@ -60,6 +60,11 @@
                <input type="hidden" name="action" value="add">
                <input type="hidden" name="artId" value="<?php echo $row->articleID ?>">
                <input type="number" name="num" value=1 hidden>
+               <select name="groesse">
+                  <option>L</option>
+                  <option>M</option>
+                  <option>S</option>
+               </select>
                <input type="submit" value="In den Warenkorb">
               </form>
             <script>

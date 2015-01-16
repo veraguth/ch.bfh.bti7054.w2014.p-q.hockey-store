@@ -101,7 +101,7 @@
 						<img src="images/logo.png">
 					</a>
 				</div><!-- #logo -->
-				<img src="images/banner.png">
+				<img class="banner" src="images/banner.png">
 				<div id="navigation" class="container">
 					<div class="row">
 						<div class="col-sm-9">
@@ -182,6 +182,7 @@
 							<p>Anzahl: <?php echo $num; ?> 
 								<a class="cart-remove" href="cart.php?action=remove&artId=<?php echo $artId; ?>&num=1">-</a><a class="cart-add" href="cart.php?action=add&artId=<?php echo $artId; ?>&num=1">+</a></p>
 							<p>Preis: <span style="float:right;">CHF <?php echo $sum; ?></span></p>
+							<p>Grösse: <span style="float:right;"><?php echo substr($artId, -1); ?></span></p>
 						</div><!-- .article-info-cart -->
 					</div><!-- .row -->
 					

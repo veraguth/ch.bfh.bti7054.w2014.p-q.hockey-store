@@ -2,8 +2,9 @@
 session_start();
 if(isset($_GET['num']) && isset($_GET['artId'])){
 	$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
-	$key = $_GET['artId'];
+	$key = $_GET['artId'].$_GET['groesse'];
 	if(!isset($cart[$key])){
+		$cart[$key] = 0;
 		$cart[$key] = 0;
 	}
 	if(isset($_GET['action']) && $_GET['action'] == 'add'){

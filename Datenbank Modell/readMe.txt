@@ -1,1 +1,0 @@
-File mit DBDesigner öffnen. Gratis tool.
